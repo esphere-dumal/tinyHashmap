@@ -21,7 +21,7 @@ public class NodeList implements BucketContainer{
         }
     }
     //链表的哨兵节点
-    Node head = null;
+    Node head = new Node(null);
 
     /**
      * 写死的,不能修改,用来判断具体的数据结构
@@ -41,14 +41,20 @@ public class NodeList implements BucketContainer{
     @Override
     public Entry searchElement(String key) {
         //todo:write your code here for part-a
+
         Node tempNode = head;
 
-        while(tempNode!=null){
-            tempNode = tempNode.next;
+        if(tempNode.next!=null){
+            tempNode=tempNode.next;
+            while (tempNode!=null){
+                //找到了相应的key
+                if(key==null&&tempNode.entry.key==null)
+                    return tempNode.entry;
 
-            //找到了相应的key
-            if(key.equals(tempNode.entry.key))
-                return tempNode.entry;
+                else if(key.equals(tempNode.entry.key))
+                    return tempNode.entry;
+                tempNode=tempNode.next;
+            }
         }
 
         //没有相应的key
@@ -65,7 +71,7 @@ public class NodeList implements BucketContainer{
         //相当于添加一个元素到链表尾部
         Node tempNode = head;
 
-        while(tempNode != null&&tempNode.next!=null)
+        while(tempNode.next!=null)
             tempNode = tempNode.next;
 
         tempNode.next = new Node(e);
@@ -82,13 +88,14 @@ public class NodeList implements BucketContainer{
         //相当于先查找一个元素，然后更新
         Node tempNode = head;
 
-        while(tempNode != null){
-            tempNode = head.next;
-
-            //找到了相应的key
-            if(tempNode.entry.key.equals(e.key)){
-                tempNode.entry.value = e.value;
-                return;
+        if(tempNode.next!=null){
+            tempNode = tempNode.next;
+            while(tempNode!=null){
+                if(tempNode.entry.key==null&&e.key==null)
+                    tempNode.entry.value = e.value;
+                else if(tempNode.entry.key.equals(e.key))
+                    tempNode.entry.value = e.value;
+                tempNode = tempNode.next;
             }
         }
 
@@ -103,16 +110,18 @@ public class NodeList implements BucketContainer{
         //todo:write your code here for part-a
         Node tempNode = head;
 
-        while(tempNode!=null){
-            tempNode = tempNode.next;
-            if(tempNode.entry.key.equals(key)){
-                tempNode.next = tempNode.next.next;
+       while(tempNode.next!=null){
+           if(tempNode.next.entry.key==null&&key==null){
+               tempNode.next = tempNode.next.next;
+               return;
+           }
+           if(tempNode.next.entry.key.equals(key)) {
+               tempNode.next = tempNode.next.next;
+               return;
+           }
 
-                //delete tempNode.next;
-                tempNode.next = null; //手动释放内存？
-                return;
-            }
-        }
+           tempNode = tempNode.next;
+       }
     }
 
     /**
@@ -126,9 +135,12 @@ public class NodeList implements BucketContainer{
         Entry[] res = new Entry[32];
         int cnt=0;
         Node tempNode = head;
-        while(tempNode!=null){
-            tempNode = tempNode.next;
-            res[cnt++] = tempNode.entry;
+        if(tempNode.next!=null){
+            tempNode=tempNode.next;
+            while(tempNode!=null){
+                res[cnt++] = tempNode.entry;
+                tempNode = tempNode.next;
+            }
         }
         return res;
         //return null;

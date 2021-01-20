@@ -39,8 +39,8 @@ public class Bucket {
     public String getValue(String key){
         //todo:write your code here for part-a
         Entry res = container.searchElement(key);
+        if(res==null) return null;
         return res.value;
-        //return null;
     }
 
     /**
@@ -53,8 +53,17 @@ public class Bucket {
     public String putValue(String key,String value){
         //todo:write your code here for part-a
         Entry entry = new Entry(key,value);
-        container.addElement(entry);
-        return null;
+        String res;
+        if(container.searchElement(key)==null){
+            container.addElement(entry);
+            return null;
+        }
+
+        else{
+            res = container.searchElement(key).value;
+            container.updateElement(entry);
+            return res;
+        }
     }
 
     /**
