@@ -38,7 +38,9 @@ public class Bucket {
      */
     public String getValue(String key){
         //todo:write your code here for part-a
-        return null;
+        Entry res = container.searchElement(key);
+        return res.value;
+        //return null;
     }
 
     /**
@@ -50,6 +52,8 @@ public class Bucket {
      */
     public String putValue(String key,String value){
         //todo:write your code here for part-a
+        Entry entry = new Entry(key,value);
+        container.addElement(entry);
         return null;
     }
 
@@ -60,7 +64,10 @@ public class Bucket {
      */
     public String removeValue(String key){
         //todo:write your code here for part-a
-        return null;
+        String res = container.searchElement(key).value;
+        container.removeElement(key);
+        return res;
+        //return null;
     }
 
     /**

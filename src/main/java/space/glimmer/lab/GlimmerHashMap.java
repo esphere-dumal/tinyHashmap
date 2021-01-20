@@ -18,6 +18,8 @@ public class GlimmerHashMap {
      */
     private int bucketLen = 4;
 
+    private int usedSize = 0;
+
     /**
      * 拉链法实现哈希表的这个数组,里面的每个桶Bucket里通过数据结构存放内容
      */
@@ -44,6 +46,7 @@ public class GlimmerHashMap {
      */
     public Bucket getBucket(String key) {
         //todo:write your code here for part-a
+        //这里真的要加上一点东西🐎？
         return buckets[hashIt(key)];
     }
 
@@ -54,7 +57,11 @@ public class GlimmerHashMap {
      */
     public int size() {
         //todo:write your code here for part-a
-        return 0;
+        //思路1：调用container.traverse()遍历所有桶里的元素，计算个数
+        //思路2：在bucket里维护一个值，每次增加元素就++，删除元素就--
+        //这里我采用了思路2，不知道算不算违规操作（
+        return usedSize;
+        //return 0;
     }
 
     /**
@@ -65,6 +72,7 @@ public class GlimmerHashMap {
      */
     public String get(String key) {
         //todo:write your code here for part-a
+        usedSize++; //辅助size()函数
         return null;
     }
 
@@ -81,6 +89,8 @@ public class GlimmerHashMap {
         //todo:write your code here for part-a
         //todo:write your code here for part-b
         //todo:write your code here for part-c
+        //buckets[hashIt(key)].putValue(key,value);
+        getBucket(key).putValue(key,value);
         return null;
     }
 
@@ -93,6 +103,8 @@ public class GlimmerHashMap {
     public String remove(String key) {
         //todo:write your code here for part-a
         //todo:write your code here for part-b
+        usedSize--; //辅助size()函数
+        getBucket(key).removeValue(key);
         return null;
     }
 
