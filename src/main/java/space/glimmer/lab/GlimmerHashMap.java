@@ -1,6 +1,7 @@
 package space.glimmer.lab;
 
 import space.glimmer.lab.container.Bucket;
+import space.glimmer.lab.container.Entry;
 
 /**
  * @author Lehr
@@ -57,7 +58,6 @@ public class GlimmerHashMap {
         //思路2：在bucket里维护一个值，每次增加元素就++，删除元素就--
         //这里我采用了思路2，不知道算不算违规操作（
         return this.usedSize;
-        //return 0;
     }
 
     /**
@@ -88,6 +88,8 @@ public class GlimmerHashMap {
         String res;
         this.usedSize++; //辅助size()函数
         res =this.getBucket(key).putValue(key,value);
+        if(getBucket(key).usedSize>8)
+            getBucket(key).nodelistToBst();
         return res;
     }
 
@@ -103,6 +105,8 @@ public class GlimmerHashMap {
         String res;
         this.usedSize--; //辅助size()函数
         res = this.getBucket(key).removeValue(key);
+        if(getBucket(key).usedSize<6)
+            getBucket(key).bstToNodelist();
         return res;
     }
 

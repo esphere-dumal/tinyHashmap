@@ -16,6 +16,8 @@ public class Bucket {
      */
     private BucketContainer container;
 
+    public int usedSize;
+
     /**
      * 初始化操作,默认的container为nodelist
      */
@@ -52,6 +54,7 @@ public class Bucket {
      */
     public String putValue(String key,String value){
         //todo:write your code here for part-a
+        usedSize++;
         Entry entry = new Entry(key,value);
         String res;
         if(container.searchElement(key)==null){
@@ -73,6 +76,7 @@ public class Bucket {
      */
     public String removeValue(String key){
         //todo:write your code here for part-a
+        usedSize--;
         String res = container.searchElement(key).value;
         container.removeElement(key);
         return res;
@@ -84,6 +88,14 @@ public class Bucket {
      */
     public void nodelistToBst(){
         //todo:write your code here for part-b
+        if(container.getType().equals("Bst")) return;
+
+        Entry[] entries = container.traverse();
+        container = new Bst();
+        for (Entry entry : entries) {
+            if(entry==null) break;
+            container.addElement(entry);
+        }
     }
 
     /**
@@ -91,6 +103,14 @@ public class Bucket {
      */
     public void bstToNodelist(){
         //todo:write your code here for part-b
+        if(container.getType().equals("nodelist")) return;
+
+        Entry[] entries = container.traverse();
+        container = new NodeList();
+        for (Entry entry : entries) {
+            if(entry==null) break;
+            container.addElement(entry);
+        }
     }
 
 }

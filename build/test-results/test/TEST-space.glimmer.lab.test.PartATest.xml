@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="space.glimmer.lab.test.PartATest" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-01-20T14:23:57" hostname="DESKTOP-8BIMM91" time="0.002">
-  <properties/>
-  <testcase name="basicTestA" classname="space.glimmer.lab.test.PartATest" time="0.002"/>
-  <testcase name="nullTestA" classname="space.glimmer.lab.test.PartATest" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
