@@ -1,6 +1,7 @@
 package space.glimmer.lab.container;
 
 import com.sun.org.apache.xerces.internal.xs.ItemPSVI;
+import space.glimmer.lab.GlimmerHashMap;
 
 import java.util.Stack;
 
@@ -33,7 +34,6 @@ public class Bst implements BucketContainer{
     public String getType() {
         return "bst";
     }
-
 
     /**
      * 搜索某个元素并返回
@@ -181,21 +181,19 @@ public class Bst implements BucketContainer{
     public Entry[] traverse() {
         //todo:write your code here for part-b
         if(head == null) return null;
-        Entry[] entries = new Entry[32];
+        Entry[] entries = new Entry[2048];
         int cnt=0;
-        Stack<Node> stack = new Stack<Node>();
+        Stack<Node> stack = new Stack<>();
         Node tempNode = head;
-        while (tempNode!=null||!stack.empty()){
-            if(tempNode!=null){
-                entries[cnt++] = tempNode.entry;
-                stack.push(tempNode);
-                tempNode = tempNode.next[0];
-            }
-            else{
-                tempNode = stack.firstElement();
-                stack.pop();
-                tempNode = tempNode.next[1];
-            }
+        stack.push(tempNode);
+
+        while (!stack.empty()){
+            tempNode = stack.pop();
+            entries[cnt++] = tempNode.entry;
+            if(tempNode.next[1]!=null)
+                stack.push(tempNode.next[1]);
+            if(tempNode.next[0]!=null)
+                stack.push(tempNode.next[0]);
         }
         return entries;
     }

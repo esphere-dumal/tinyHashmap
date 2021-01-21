@@ -131,8 +131,7 @@ public class NodeList implements BucketContainer{
     @Override
     public Entry[] traverse() {
         //todo:write your code here for part-a
-        //此处临时数组考虑到part-c扩容最大至32
-        Entry[] res = new Entry[32];
+        Entry[] res = new Entry[2048];
         int cnt=0;
         Node tempNode = head;
         if(tempNode.next!=null){

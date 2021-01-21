@@ -12,26 +12,49 @@ public class test {
     public static void main(String[] args) {
         GlimmerHashMap tmap = new GlimmerHashMap();
 
-        tmap.put("EaFBFBFBFBFBFBFBFBFB", "b");
-        tmap.put("FBEaFBFBFBFBFBFBFBFB", "b");
-        tmap.put("FBFBEaFBFBFBFBFBFBFB", "b");
-        tmap.put("FBFBFBEaFBFBFBFBFBFB", "b");
-        tmap.put("FBFBFBFBEaFBFBFBFBFB", "b");
-        tmap.put("FBFBFBFBFBEaFBFBFBFB", "b");
-        tmap.put("FBFBFBFBFBFBEaFBFBFB", "b");
-        tmap.put("FBFBFBFBFBFBFBEaFBFB", "b");
-        tmap.put("FBFBFBFBFBFBFBFBEaFB", "b");
+        for (int i = 0; i <= 350; i++) {
+            String key = "Key." + i;
+            String value = "Value." + i;
+            tmap.put(key, value);
+            System.out.println(tmap.size());
+            assertEquals(i+1,tmap.size());
 
-        Bucket b = tmap.getBucket("FBFBFBFBFBFBFBFBEaFB");
-        assertEquals("bst", b.checkContainerType());
+            if (i == 5) {
+                assertEquals(16, tmap.getThreshold());
+            }
+            if (i == 14) {
+                assertEquals(16, tmap.getThreshold());
+            }
+            if (i == 15) {
+                assertEquals(16, tmap.getThreshold());
+            }
+            if (i == 16) {
+                assertEquals(32, tmap.getThreshold());
+            }
+            if (i == 32) {
+                assertEquals(64, tmap.getThreshold());
+            }
+            if (i == 50) {
+                assertEquals(64, tmap.getThreshold());
+            }
+            if (i == 67) {
+                assertEquals(128, tmap.getThreshold());
+            }
+            if (i == 211) {
+                assertEquals(256, tmap.getThreshold());
+            }
+            if(i == 255) {
+                String str = "this is break";
+            }
+            if (i == 305) {
+                assertEquals(512, tmap.getThreshold());
+            }
+        }
 
-        tmap.remove("FBFBFBFBFBFBFBFBEaFB");
-        tmap.remove("FBFBFBFBFBFBFBEaFBFB");
-        tmap.remove("FBFBFBFBFBFBEaFBFBFB");
-        tmap.remove("FBFBFBFBFBEaFBFBFBFB");
-        tmap.remove("FBFBFBFBEaFBFBFBFBFB");
-        tmap.remove("FBFBFBEaFBFBFBFBFBFB");
-
-        assertEquals("nodelist", b.checkContainerType());
+//        for (int i = 0; i <= 50; i++) {
+//            String key = "Key." + i;
+//            String value = "Value." + i;
+//            assertEquals(value, tmap.get(key));
+//        }
     }
 }

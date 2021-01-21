@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="space.glimmer.lab.test.PartCTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-01-21T08:05:00" hostname="DESKTOP-8BIMM91" time="0.007">
+  <properties/>
+  <testcase name="resizeTestC" classname="space.glimmer.lab.test.PartCTest" time="0.004"/>
+  <testcase name="randomTestC" classname="space.glimmer.lab.test.PartCTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

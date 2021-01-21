@@ -83,6 +83,10 @@ public class Bucket {
         //return null;
     }
 
+    public Entry[] getEntry(){
+        return container.traverse();
+    }
+
     /**
      * 冲突过多时为了防止链表退化时,所有数据从链表形式转换为二叉搜索树形式的操作
      */

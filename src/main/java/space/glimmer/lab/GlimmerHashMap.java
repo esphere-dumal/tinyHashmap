@@ -86,10 +86,15 @@ public class GlimmerHashMap {
         //todo:write your code here for part-b
         //todo:write your code here for part-c
         String res;
-        this.usedSize++; //辅助size()函数
-        res =this.getBucket(key).putValue(key,value);
+
+        usedSize++; //辅助size()函数
+        if(size()>getThreshold())
+            resize();
+
+        res = getBucket(key).putValue(key,value);
         if(getBucket(key).usedSize>8)
             getBucket(key).nodelistToBst();
+
         return res;
     }
 
@@ -118,6 +123,23 @@ public class GlimmerHashMap {
      */
     private void resize() {
         //todo:write your code here for part-c
+        bucketLen = bucketLen * 2;
+        threshold = threshold * 2;
+        Bucket[] newBuckets = new Bucket[bucketLen];
+        for(int i=0;i<bucketLen;i++){
+            newBuckets[i] = new Bucket();
+        }
+        for(int i=0;i<bucketLen/2;i++){
+            Entry[] entries = buckets[i].getEntry();
+            for (Entry entry : entries) {
+                if (entry == null) break;
+                //put(entry.key,entry.value);
+                String key = entry.key , value=entry.value;
+                newBuckets[hashIt(entry.key)].putValue(key,value);
+            }
+        }
+
+        buckets = newBuckets;
     }
 
 
